@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	
+	<button onclick="txt()">데이터 가지고 오기</button>
+	
+	<div>ㅠㅠ</div>
+	
+	<script>
+	function txt() {
+		$.ajax({    // jQuery에 있는 ajax 호출
+			url : 'hello.jsp',  // 원하는 url에 요청할 주소 입력
+			type : 'get',        // 요청방식 지정
+			data : {'name':'junghyung'},   // 값 보내기(키와 값의 객체형태 발송)
+			success : function(res) {    //성공과 실패시 형태 작성
+				$('div').append(res)     // 여기서 res는 컴퓨터가 지정이 안되었다고 생각하고 자동으로 변수 생성(포이스팅)
+				alert('연결성공');          // 에러도 자동으로 진행해서 에러(주로 오타) 찾기가 힘들다
+			},
+			error : function() {
+				alert('에러발생');
+			}
+		})
+	}
+
+	</script>
+</body>
+</html>

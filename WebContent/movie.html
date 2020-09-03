@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	
+	<button onclick="movie()"> 박스오피스 순위 받아오기</button>
+	<div></div>
+	<script>
+		function movie() {
+			$.ajax({
+				url : 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=8fad73e5540ba9ceff903beb7503ffd8&targetDt=20200809',
+				type : 'get',
+				success : function(res) {
+					for(var i = 0; i < res.boxOfficeResult.weeklyBoxOfficeList.length; i++){
+					console.log(res.boxOfficeResult.weeklyBoxOfficeList[i].movieNm);
+					$('div').append("영화제목 : "+res.boxOfficeResult.weeklyBoxOfficeList[i].movieNm);
+					$('div').append("<br>");
+					$('div').append("영화순위 : "+res.boxOfficeResult.weeklyBoxOfficeList[i].rnum);
+					$('div').append("<br>");
+					$('div').append("개봉일 : "+res.boxOfficeResult.weeklyBoxOfficeList[i].openDt);
+					$('div').append("<br>");
+					$('div').append("----------------------------------------------");
+					$('div').append("<br>");
+					}
+				},
+				error : function() {
+					alert('에러발생');
+				}
+			})
+		}
+	
+	</script>
+</body>
+</html>
